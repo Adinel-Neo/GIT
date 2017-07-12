@@ -1,0 +1,127 @@
+﻿@{
+    ViewBag.Title = "Monitor";
+}
+<nav id="mainNav" class="navbar static-top navbar-toggleable-md navbar-inverse bg-inverse">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarExample" aria-controls="navbarExample" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">Bem Vindo Monitor!</a>
+    <div class="collapse navbar-collapse" id="navbarExample">
+        <ul class="sidebar-nav navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index", "Monitor")"><i class="fa fa-fw fa-dashboard"></i>Área de Trabalho</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="@Url.Action("Postar", "Monitor")"><i class="fa fa-fw fa-book"></i>Postar Materiais</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link " href="@Url.Action("Calendario", "Monitor")"><i class="fa fa-fw fa-table"></i>Calendario Monitoria</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Mensagem", "Monitor")"><i class="fa fa-fw fa-edit"></i>Responder Mensagem</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Logout", "Monitor")"><i class="fa fa-fw fa-sign-out"></i>Logout</a>
+            </li>
+        </ul>
+ 
+    </div>
+</nav>
+<div class="content-wrapper py-3">
+    <div class="container-fluid">
+        <!-- Breadcrumbs -->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Área de Trabalho</a></li>
+            <li class="breadcrumb-item active">Monitor</li>
+        </ol>
+        <!-- Icon Cards -->
+        <div class="row">
+            <div class="col-xl-3 col-sm-6 mb-3">
+                <div class="card card-inverse card-primary o-hidden h-100">
+                    <div class="card-block">
+                        <div class="card-block-icon">
+                            <i class="fa fa-fw fa-comments"></i>
+                        </div>
+                        <div class="mr-5">
+                            26 Novas Mensagens!
+                        </div>
+                    </div>
+                    <a href="#" class="card-footer clearfix small z-1">
+                        <span class="float-left">Verificar</span>
+                        <span class="float-right"><i class="fa fa-angle-right"></i></span>
+                    </a>
+                </div>
+            </div>
+           
+            <div class="col-xl-3 col-sm-6 mb-3">
+                <div class="card card-inverse card-danger o-hidden h-100">
+                    <div class="card-block">
+                        <div class="card-block-icon">
+                            <i class="fa fa-fw fa-star"></i>
+                        </div>
+                        <div class="mr-5">
+                            Conteudos Favoritos!
+                        </div>
+                    </div>
+                    <a href="#" class="card-footer clearfix small z-1">
+                        <span class="float-left">Verificar</span>
+                        <span class="float-right"><i class="fa fa-angle-right"></i></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+       
+    </div>
+    <div class="container">
+        <h2>Calendario</h2>
+        <p>Calendario de Monitoria</p>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Hora</th>
+                        <th>Disciplina</th>
+                        <th>Evento</th>
+                        <th>Monitor</th>
+                        <th>Excluir</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var agenda in ViewBag.Agenda)
+                    {
+                        <tr>
+                            <td>@agenda.hora</td>
+                            <td>@agenda.data</td>
+                            <td id="@agenda.idDisciplina">@agenda.disciplina</td>
+                            <td>@agenda.evento</td>
+                            <td id="@agenda.idMonitor">@agenda.monitor</td>
+                            <td>@Html.ActionLink("Excluir", "Excluir", new { id = agenda.idAgenda })</td>
+                        </tr>
+                    }
+                    
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <form action="/Monitor/CadastrarAgenda" method="post">
+            <h3>Inserir na Agenda</h3>
+            <label for="Data">Data</label>
+            <input type="date" name="data" id="data" class="form-control">
+            <label for="hora">Horario</label>
+            <input type="time" name="hora" id="data" class="form-control">
+            <label for="evento">Evento</label>
+            <input type="text" name="evento" id="evento" class="form-control" required="" autofocus="" style="background-repeat: no-repeat; background-attachment: scroll;  cursor: auto;" autocomplete="off">
+            
+            <br />
+            <button class="btn btn-primary" type="submit">Enviar</button>
+            @*<input class="btn-primary" type="submit" value="Enviar" />*@
+        </form>
+    </div>
+</div>
+

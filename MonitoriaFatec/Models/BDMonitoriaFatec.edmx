@@ -1,0 +1,667 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MONITORIA_FATECModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CALENDAR">
+          <Key>
+            <PropertyRef Name="IDCALENDARIO" />
+          </Key>
+          <Property Name="IDCALENDARIO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DATE_HOUR" Type="datetime" Nullable="false" />
+          <Property Name="IDMONITOR" Type="int" Nullable="false" />
+          <Property Name="EVENTO" Type="varchar" MaxLength="255" />
+          <Property Name="ID_DISCIPLINE" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CONTENT">
+          <Key>
+            <PropertyRef Name="IDCONTENT" />
+          </Key>
+          <Property Name="IDCONTENT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDAUTHOR" Type="int" Nullable="false" />
+          <Property Name="TITLE" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="IDTYPECONTENT" Type="int" Nullable="false" />
+          <Property Name="CONTENT" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="INFOCONTENT" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="DATECONTENT" Type="datetime" Nullable="false" />
+          <Property Name="IDSTATUS" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COURSE">
+          <Key>
+            <PropertyRef Name="IDCOURSE" />
+          </Key>
+          <Property Name="IDCOURSE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDCOORDINATOR" Type="int" />
+          <Property Name="NMCOURSE" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DISCIPLINE">
+          <Key>
+            <PropertyRef Name="IDDISCIPLINE" />
+          </Key>
+          <Property Name="IDDISCIPLINE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NMDISCIPLINE" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MONITORIA_FATEC.dbo.SCHEDULE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SCHEDULE">
+          <Key>
+            <PropertyRef Name="IDDISCIPLINE" />
+            <PropertyRef Name="IDCOURSE" />
+            <PropertyRef Name="SEMESTER" />
+            <PropertyRef Name="PERIOD" />
+          </Key>
+          <Property Name="IDTEACHER" Type="int" />
+          <Property Name="IDDISCIPLINE" Type="int" Nullable="false" />
+          <Property Name="IDCOURSE" Type="int" Nullable="false" />
+          <Property Name="SEMESTER" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="PERIOD" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IDMONITOR" Type="int" />
+        </EntityType>
+        <EntityType Name="SCOPE">
+          <Key>
+            <PropertyRef Name="IDSCOPE" />
+          </Key>
+          <Property Name="IDSCOPE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SCOPE" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="STATUSCONTENT">
+          <Key>
+            <PropertyRef Name="IDSTATUS" />
+          </Key>
+          <Property Name="IDSTATUS" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NMSTATUS" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TYPECONTENT">
+          <Key>
+            <PropertyRef Name="IDTYPECONTENT" />
+          </Key>
+          <Property Name="IDTYPECONTENT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NMTYPECONTENT" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TYPEMESSAGE">
+          <Key>
+            <PropertyRef Name="IDTYPEMESSAGE" />
+          </Key>
+          <Property Name="IDTYPEMESSAGE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NMTYPEMESSAGE" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USERMESSAGE">
+          <Key>
+            <PropertyRef Name="IDMESSAGE" />
+          </Key>
+          <Property Name="IDMESSAGE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDAUTHOR" Type="int" Nullable="false" />
+          <Property Name="IDRECIVER" Type="int" Nullable="false" />
+          <Property Name="HEADER" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="BODY" Type="varchar(max)" Nullable="false" />
+          <Property Name="MESSAGEDATE" Type="datetime" Nullable="false" />
+          <Property Name="IDORIGINMESSAGE" Type="int" />
+          <Property Name="IDTYPEMESSAGE" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="IDUSER" />
+          </Key>
+          <Property Name="IDUSER" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USERPASSWORD" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="NMUSER" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="EMAILUSER" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="IDSCOPE" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_COURSE">
+          <End Role="COURSE" Type="Self.COURSE" Multiplicity="1" />
+          <End Role="SCHEDULE" Type="Self.SCHEDULE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COURSE">
+              <PropertyRef Name="IDCOURSE" />
+            </Principal>
+            <Dependent Role="SCHEDULE">
+              <PropertyRef Name="IDCOURSE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DISCIPLINE">
+          <End Role="DISCIPLINE" Type="Self.DISCIPLINE" Multiplicity="1" />
+          <End Role="SCHEDULE" Type="Self.SCHEDULE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DISCIPLINE">
+              <PropertyRef Name="IDDISCIPLINE" />
+            </Principal>
+            <Dependent Role="SCHEDULE">
+              <PropertyRef Name="IDDISCIPLINE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DISCIPLINE_CALENDAR">
+          <End Role="DISCIPLINE" Type="Self.DISCIPLINE" Multiplicity="1" />
+          <End Role="CALENDAR" Type="Self.CALENDAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DISCIPLINE">
+              <PropertyRef Name="IDDISCIPLINE" />
+            </Principal>
+            <Dependent Role="CALENDAR">
+              <PropertyRef Name="ID_DISCIPLINE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCOPE">
+          <End Role="SCOPE" Type="Self.SCOPE" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCOPE">
+              <PropertyRef Name="IDSCOPE" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="IDSCOPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STATUSCONTENT">
+          <End Role="STATUSCONTENT" Type="Self.STATUSCONTENT" Multiplicity="1" />
+          <End Role="CONTENT" Type="Self.CONTENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATUSCONTENT">
+              <PropertyRef Name="IDSTATUS" />
+            </Principal>
+            <Dependent Role="CONTENT">
+              <PropertyRef Name="IDSTATUS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TYPECONTENT">
+          <End Role="TYPECONTENT" Type="Self.TYPECONTENT" Multiplicity="1" />
+          <End Role="CONTENT" Type="Self.CONTENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TYPECONTENT">
+              <PropertyRef Name="IDTYPECONTENT" />
+            </Principal>
+            <Dependent Role="CONTENT">
+              <PropertyRef Name="IDTYPECONTENT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TYPEMESSAGE">
+          <End Role="TYPEMESSAGE" Type="Self.TYPEMESSAGE" Multiplicity="1" />
+          <End Role="USERMESSAGE" Type="Self.USERMESSAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TYPEMESSAGE">
+              <PropertyRef Name="IDTYPEMESSAGE" />
+            </Principal>
+            <Dependent Role="USERMESSAGE">
+              <PropertyRef Name="IDTYPEMESSAGE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_MONITOR">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="CALENDAR" Type="Self.CALENDAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="IDUSER" />
+            </Principal>
+            <Dependent Role="CALENDAR">
+              <PropertyRef Name="IDMONITOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MONITORIA_FATECModelStoreContainer">
+          <EntitySet Name="CALENDAR" EntityType="Self.CALENDAR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CONTENT" EntityType="Self.CONTENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COURSE" EntityType="Self.COURSE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DISCIPLINE" EntityType="Self.DISCIPLINE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SCOPE" EntityType="Self.SCOPE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STATUSCONTENT" EntityType="Self.STATUSCONTENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TYPECONTENT" EntityType="Self.TYPECONTENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TYPEMESSAGE" EntityType="Self.TYPEMESSAGE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERMESSAGE" EntityType="Self.USERMESSAGE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SCHEDULE" EntityType="Self.SCHEDULE" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SCHEDULE].[IDTEACHER] AS [IDTEACHER], 
+    [SCHEDULE].[IDDISCIPLINE] AS [IDDISCIPLINE], 
+    [SCHEDULE].[IDCOURSE] AS [IDCOURSE], 
+    [SCHEDULE].[SEMESTER] AS [SEMESTER], 
+    [SCHEDULE].[PERIOD] AS [PERIOD], 
+    [SCHEDULE].[IDMONITOR] AS [IDMONITOR]
+    FROM [dbo].[SCHEDULE] AS [SCHEDULE]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_COURSE" Association="Self.FK_COURSE">
+            <End Role="COURSE" EntitySet="COURSE" />
+            <End Role="SCHEDULE" EntitySet="SCHEDULE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DISCIPLINE" Association="Self.FK_DISCIPLINE">
+            <End Role="DISCIPLINE" EntitySet="DISCIPLINE" />
+            <End Role="SCHEDULE" EntitySet="SCHEDULE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DISCIPLINE_CALENDAR" Association="Self.FK_DISCIPLINE_CALENDAR">
+            <End Role="DISCIPLINE" EntitySet="DISCIPLINE" />
+            <End Role="CALENDAR" EntitySet="CALENDAR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCOPE" Association="Self.FK_SCOPE">
+            <End Role="SCOPE" EntitySet="SCOPE" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STATUSCONTENT" Association="Self.FK_STATUSCONTENT">
+            <End Role="STATUSCONTENT" EntitySet="STATUSCONTENT" />
+            <End Role="CONTENT" EntitySet="CONTENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TYPECONTENT" Association="Self.FK_TYPECONTENT">
+            <End Role="TYPECONTENT" EntitySet="TYPECONTENT" />
+            <End Role="CONTENT" EntitySet="CONTENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TYPEMESSAGE" Association="Self.FK_TYPEMESSAGE">
+            <End Role="TYPEMESSAGE" EntitySet="TYPEMESSAGE" />
+            <End Role="USERMESSAGE" EntitySet="USERMESSAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_MONITOR" Association="Self.FK_USER_MONITOR">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="CALENDAR" EntitySet="CALENDAR" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MONITORIA_FATECModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CONTENT">
+          <Key>
+            <PropertyRef Name="IDCONTENT" />
+          </Key>
+          <Property Name="IDCONTENT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDAUTHOR" Type="Int32" Nullable="false" />
+          <Property Name="TITLE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDTYPECONTENT" Type="Int32" Nullable="false" />
+          <Property Name="CONTENT1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="INFOCONTENT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DATECONTENT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IDSTATUS" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="STATUSCONTENT" Relationship="Self.FK_STATUSCONTENT" FromRole="CONTENT" ToRole="STATUSCONTENT" />
+          <NavigationProperty Name="TYPECONTENT" Relationship="Self.FK_TYPECONTENT" FromRole="CONTENT" ToRole="TYPECONTENT" />
+        </EntityType>
+        <EntityType Name="COURSE">
+          <Key>
+            <PropertyRef Name="IDCOURSE" />
+          </Key>
+          <Property Name="IDCOURSE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDCOORDINATOR" Type="Int32" />
+          <Property Name="NMCOURSE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="SCHEDULE" Relationship="Self.FK_COURSE" FromRole="COURSE" ToRole="SCHEDULE" />
+        </EntityType>
+        <EntityType Name="DISCIPLINE">
+          <Key>
+            <PropertyRef Name="IDDISCIPLINE" />
+          </Key>
+          <Property Name="IDDISCIPLINE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NMDISCIPLINE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="SCHEDULE" Relationship="Self.FK_DISCIPLINE" FromRole="DISCIPLINE" ToRole="SCHEDULE" />
+          <NavigationProperty Name="CALENDAR" Relationship="MONITORIA_FATECModel.FK_DISCIPLINE_CALENDAR" FromRole="DISCIPLINE" ToRole="CALENDAR" />
+        </EntityType>
+        <EntityType Name="SCOPE">
+          <Key>
+            <PropertyRef Name="IDSCOPE" />
+          </Key>
+          <Property Name="IDSCOPE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SCOPE1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK_SCOPE" FromRole="SCOPE" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="STATUSCONTENT">
+          <Key>
+            <PropertyRef Name="IDSTATUS" />
+          </Key>
+          <Property Name="IDSTATUS" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NMSTATUS" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CONTENT" Relationship="Self.FK_STATUSCONTENT" FromRole="STATUSCONTENT" ToRole="CONTENT" />
+        </EntityType>
+        <EntityType Name="TYPECONTENT">
+          <Key>
+            <PropertyRef Name="IDTYPECONTENT" />
+          </Key>
+          <Property Name="IDTYPECONTENT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NMTYPECONTENT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CONTENT" Relationship="Self.FK_TYPECONTENT" FromRole="TYPECONTENT" ToRole="CONTENT" />
+        </EntityType>
+        <EntityType Name="TYPEMESSAGE">
+          <Key>
+            <PropertyRef Name="IDTYPEMESSAGE" />
+          </Key>
+          <Property Name="IDTYPEMESSAGE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NMTYPEMESSAGE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="USERMESSAGE" Relationship="Self.FK_TYPEMESSAGE" FromRole="TYPEMESSAGE" ToRole="USERMESSAGE" />
+        </EntityType>
+        <EntityType Name="USERMESSAGE">
+          <Key>
+            <PropertyRef Name="IDMESSAGE" />
+          </Key>
+          <Property Name="IDMESSAGE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDAUTHOR" Type="Int32" Nullable="false" />
+          <Property Name="IDRECIVER" Type="Int32" Nullable="false" />
+          <Property Name="HEADER" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BODY" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MESSAGEDATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IDORIGINMESSAGE" Type="Int32" />
+          <Property Name="IDTYPEMESSAGE" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TYPEMESSAGE" Relationship="Self.FK_TYPEMESSAGE" FromRole="USERMESSAGE" ToRole="TYPEMESSAGE" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="IDUSER" />
+          </Key>
+          <Property Name="IDUSER" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USERPASSWORD" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NMUSER" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EMAILUSER" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDSCOPE" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SCOPE" Relationship="Self.FK_SCOPE" FromRole="USUARIO" ToRole="SCOPE" />
+          <NavigationProperty Name="CALENDAR" Relationship="MONITORIA_FATECModel.FK_USER_MONITOR" FromRole="USUARIO" ToRole="CALENDAR" />
+        </EntityType>
+        <EntityType Name="SCHEDULE">
+          <Key>
+            <PropertyRef Name="IDDISCIPLINE" />
+            <PropertyRef Name="IDCOURSE" />
+            <PropertyRef Name="SEMESTER" />
+            <PropertyRef Name="PERIOD" />
+          </Key>
+          <Property Name="IDTEACHER" Type="Int32" />
+          <Property Name="IDDISCIPLINE" Type="Int32" Nullable="false" />
+          <Property Name="IDCOURSE" Type="Int32" Nullable="false" />
+          <Property Name="SEMESTER" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PERIOD" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="IDMONITOR" Type="Int32" />
+          <NavigationProperty Name="COURSE" Relationship="Self.FK_COURSE" FromRole="SCHEDULE" ToRole="COURSE" />
+          <NavigationProperty Name="DISCIPLINE" Relationship="Self.FK_DISCIPLINE" FromRole="SCHEDULE" ToRole="DISCIPLINE" />
+        </EntityType>
+        <Association Name="FK_STATUSCONTENT">
+          <End Role="STATUSCONTENT" Type="Self.STATUSCONTENT" Multiplicity="1" />
+          <End Role="CONTENT" Type="Self.CONTENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATUSCONTENT">
+              <PropertyRef Name="IDSTATUS" />
+            </Principal>
+            <Dependent Role="CONTENT">
+              <PropertyRef Name="IDSTATUS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TYPECONTENT">
+          <End Role="TYPECONTENT" Type="Self.TYPECONTENT" Multiplicity="1" />
+          <End Role="CONTENT" Type="Self.CONTENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TYPECONTENT">
+              <PropertyRef Name="IDTYPECONTENT" />
+            </Principal>
+            <Dependent Role="CONTENT">
+              <PropertyRef Name="IDTYPECONTENT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COURSE">
+          <End Role="COURSE" Type="Self.COURSE" Multiplicity="1" />
+          <End Role="SCHEDULE" Type="Self.SCHEDULE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COURSE">
+              <PropertyRef Name="IDCOURSE" />
+            </Principal>
+            <Dependent Role="SCHEDULE">
+              <PropertyRef Name="IDCOURSE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DISCIPLINE">
+          <End Role="DISCIPLINE" Type="Self.DISCIPLINE" Multiplicity="1" />
+          <End Role="SCHEDULE" Type="Self.SCHEDULE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DISCIPLINE">
+              <PropertyRef Name="IDDISCIPLINE" />
+            </Principal>
+            <Dependent Role="SCHEDULE">
+              <PropertyRef Name="IDDISCIPLINE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCOPE">
+          <End Role="SCOPE" Type="Self.SCOPE" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCOPE">
+              <PropertyRef Name="IDSCOPE" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="IDSCOPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TYPEMESSAGE">
+          <End Role="TYPEMESSAGE" Type="Self.TYPEMESSAGE" Multiplicity="1" />
+          <End Role="USERMESSAGE" Type="Self.USERMESSAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TYPEMESSAGE">
+              <PropertyRef Name="IDTYPEMESSAGE" />
+            </Principal>
+            <Dependent Role="USERMESSAGE">
+              <PropertyRef Name="IDTYPEMESSAGE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MONITORIA_FATECEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CONTENT" EntityType="Self.CONTENT" />
+          <EntitySet Name="COURSE" EntityType="Self.COURSE" />
+          <EntitySet Name="DISCIPLINE" EntityType="Self.DISCIPLINE" />
+          <EntitySet Name="SCOPE" EntityType="Self.SCOPE" />
+          <EntitySet Name="STATUSCONTENT" EntityType="Self.STATUSCONTENT" />
+          <EntitySet Name="TYPECONTENT" EntityType="Self.TYPECONTENT" />
+          <EntitySet Name="TYPEMESSAGE" EntityType="Self.TYPEMESSAGE" />
+          <EntitySet Name="USERMESSAGE" EntityType="Self.USERMESSAGE" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" />
+          <EntitySet Name="SCHEDULE" EntityType="Self.SCHEDULE" />
+          <AssociationSet Name="FK_STATUSCONTENT" Association="Self.FK_STATUSCONTENT">
+            <End Role="STATUSCONTENT" EntitySet="STATUSCONTENT" />
+            <End Role="CONTENT" EntitySet="CONTENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TYPECONTENT" Association="Self.FK_TYPECONTENT">
+            <End Role="TYPECONTENT" EntitySet="TYPECONTENT" />
+            <End Role="CONTENT" EntitySet="CONTENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COURSE" Association="Self.FK_COURSE">
+            <End Role="COURSE" EntitySet="COURSE" />
+            <End Role="SCHEDULE" EntitySet="SCHEDULE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DISCIPLINE" Association="Self.FK_DISCIPLINE">
+            <End Role="DISCIPLINE" EntitySet="DISCIPLINE" />
+            <End Role="SCHEDULE" EntitySet="SCHEDULE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCOPE" Association="Self.FK_SCOPE">
+            <End Role="SCOPE" EntitySet="SCOPE" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TYPEMESSAGE" Association="Self.FK_TYPEMESSAGE">
+            <End Role="TYPEMESSAGE" EntitySet="TYPEMESSAGE" />
+            <End Role="USERMESSAGE" EntitySet="USERMESSAGE" />
+          </AssociationSet>
+          <EntitySet Name="CALENDAR" EntityType="MONITORIA_FATECModel.CALENDAR" />
+          <AssociationSet Name="FK_DISCIPLINE_CALENDAR" Association="MONITORIA_FATECModel.FK_DISCIPLINE_CALENDAR">
+            <End Role="DISCIPLINE" EntitySet="DISCIPLINE" />
+            <End Role="CALENDAR" EntitySet="CALENDAR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_MONITOR" Association="MONITORIA_FATECModel.FK_USER_MONITOR">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="CALENDAR" EntitySet="CALENDAR" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CALENDAR">
+          <Key>
+            <PropertyRef Name="IDCALENDARIO" />
+          </Key>
+          <Property Name="IDCALENDARIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DATE_HOUR" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IDMONITOR" Type="Int32" Nullable="false" />
+          <Property Name="EVENTO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ID_DISCIPLINE" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DISCIPLINE" Relationship="MONITORIA_FATECModel.FK_DISCIPLINE_CALENDAR" FromRole="CALENDAR" ToRole="DISCIPLINE" />
+          <NavigationProperty Name="USUARIO" Relationship="MONITORIA_FATECModel.FK_USER_MONITOR" FromRole="CALENDAR" ToRole="USUARIO" />
+        </EntityType>
+        <Association Name="FK_DISCIPLINE_CALENDAR">
+          <End Type="MONITORIA_FATECModel.DISCIPLINE" Role="DISCIPLINE" Multiplicity="1" />
+          <End Type="MONITORIA_FATECModel.CALENDAR" Role="CALENDAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DISCIPLINE">
+              <PropertyRef Name="IDDISCIPLINE" />
+            </Principal>
+            <Dependent Role="CALENDAR">
+              <PropertyRef Name="ID_DISCIPLINE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_MONITOR">
+          <End Type="MONITORIA_FATECModel.USUARIO" Role="USUARIO" Multiplicity="1" />
+          <End Type="MONITORIA_FATECModel.CALENDAR" Role="CALENDAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="IDUSER" />
+            </Principal>
+            <Dependent Role="CALENDAR">
+              <PropertyRef Name="IDMONITOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MONITORIA_FATECModelStoreContainer" CdmEntityContainer="MONITORIA_FATECEntities">
+          <EntitySetMapping Name="CONTENT">
+            <EntityTypeMapping TypeName="MONITORIA_FATECModel.CONTENT">
+              <MappingFragment StoreEntitySet="CONTENT">
+                <ScalarProperty Name="IDCONTENT" ColumnName="IDCONTENT" />
+                <ScalarProperty Name="IDAUTHOR" ColumnName="IDAUTHOR" />
+                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+                <ScalarProperty Name="IDTYPECONTENT" ColumnName="IDTYPECONTENT" />
+                <ScalarProperty Name="CONTENT1" ColumnName="CONTENT" />
+                <ScalarProperty Name="INFOCONTENT" ColumnName="INFOCONTENT" />
+                <ScalarProperty Name="DATECONTENT" ColumnName="DATECONTENT" />
+                <ScalarProperty Name="IDSTATUS" ColumnName="IDSTATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COURSE">
+            <EntityTypeMapping TypeName="MONITORIA_FATECModel.COURSE">
+              <MappingFragment StoreEntitySet="COURSE">
+                <ScalarProperty Name="IDCOURSE" ColumnName="IDCOURSE" />
+                <ScalarProperty Name="IDCOORDINATOR" ColumnName="IDCOORDINATOR" />
+                <ScalarProperty Name="NMCOURSE" ColumnName="NMCOURSE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DISCIPLINE">
+            <EntityTypeMapping TypeName="MONITORIA_FATECModel.DISCIPLINE">
+              <MappingFragment StoreEntitySet="DISCIPLINE">
+                <ScalarProperty Name="IDDISCIPLINE" ColumnName="IDDISCIPLINE" />
+                <ScalarProperty Name="NMDISCIPLINE" ColumnName="NMDISCIPLINE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SCOPE">
+            <EntityTypeMapping TypeName="MONITORIA_FATECModel.SCOPE">
+              <MappingFragment StoreEntitySet="SCOPE">
+                <ScalarProperty Name="IDSCOPE" ColumnName="IDSCOPE" />
+                <ScalarProperty Name="SCOPE1" ColumnName="SCOPE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STATUSCONTENT">
+            <EntityTypeMapping TypeName="MONITORIA_FATECModel.STATUSCONTENT">
+              <MappingFragment StoreEntitySet="STATUSCONTENT">
+                <ScalarProperty Name="IDSTATUS" ColumnName="IDSTATUS" />
+                <ScalarProperty Name="NMSTATUS" ColumnName="NMSTATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TYPECONTENT">
+            <EntityTypeMapping TypeName="MONITORIA_FATECModel.TYPECONTENT">
+              <MappingFragment StoreEntitySet="TYPECONTENT">
+                <ScalarProperty Name="IDTYPECONTENT" ColumnName="IDTYPECONTENT" />
+                <ScalarProperty Name="NMTYPECONTENT" ColumnName="NMTYPECONTENT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TYPEMESSAGE">
+            <EntityTypeMapping TypeName="MONITORIA_FATECModel.TYPEMESSAGE">
+              <MappingFragment StoreEntitySet="TYPEMESSAGE">
+                <ScalarProperty Name="IDTYPEMESSAGE" ColumnName="IDTYPEMESSAGE" />
+                <ScalarProperty Name="NMTYPEMESSAGE" ColumnName="NMTYPEMESSAGE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERMESSAGE">
+            <EntityTypeMapping TypeName="MONITORIA_FATECModel.USERMESSAGE">
+              <MappingFragment StoreEntitySet="USERMESSAGE">
+                <ScalarProperty Name="IDMESSAGE" ColumnName="IDMESSAGE" />
+                <ScalarProperty Name="IDAUTHOR" ColumnName="IDAUTHOR" />
+                <ScalarProperty Name="IDRECIVER" ColumnName="IDRECIVER" />
+                <ScalarProperty Name="HEADER" ColumnName="HEADER" />
+                <ScalarProperty Name="BODY" ColumnName="BODY" />
+                <ScalarProperty Name="MESSAGEDATE" ColumnName="MESSAGEDATE" />
+                <ScalarProperty Name="IDORIGINMESSAGE" ColumnName="IDORIGINMESSAGE" />
+                <ScalarProperty Name="IDTYPEMESSAGE" ColumnName="IDTYPEMESSAGE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO">
+            <EntityTypeMapping TypeName="MONITORIA_FATECModel.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="IDUSER" ColumnName="IDUSER" />
+                <ScalarProperty Name="USERPASSWORD" ColumnName="USERPASSWORD" />
+                <ScalarProperty Name="NMUSER" ColumnName="NMUSER" />
+                <ScalarProperty Name="EMAILUSER" ColumnName="EMAILUSER" />
+                <ScalarProperty Name="IDSCOPE" ColumnName="IDSCOPE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SCHEDULE">
+            <EntityTypeMapping TypeName="MONITORIA_FATECModel.SCHEDULE">
+              <MappingFragment StoreEntitySet="SCHEDULE">
+                <ScalarProperty Name="IDTEACHER" ColumnName="IDTEACHER" />
+                <ScalarProperty Name="IDDISCIPLINE" ColumnName="IDDISCIPLINE" />
+                <ScalarProperty Name="IDCOURSE" ColumnName="IDCOURSE" />
+                <ScalarProperty Name="SEMESTER" ColumnName="SEMESTER" />
+                <ScalarProperty Name="PERIOD" ColumnName="PERIOD" />
+                <ScalarProperty Name="IDMONITOR" ColumnName="IDMONITOR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CALENDAR">
+            <EntityTypeMapping TypeName="MONITORIA_FATECModel.CALENDAR">
+              <MappingFragment StoreEntitySet="CALENDAR">
+                <ScalarProperty Name="ID_DISCIPLINE" ColumnName="ID_DISCIPLINE" />
+                <ScalarProperty Name="EVENTO" ColumnName="EVENTO" />
+                <ScalarProperty Name="IDMONITOR" ColumnName="IDMONITOR" />
+                <ScalarProperty Name="DATE_HOUR" ColumnName="DATE_HOUR" />
+                <ScalarProperty Name="IDCALENDARIO" ColumnName="IDCALENDARIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,138 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- Navigation -->
+<nav id="mainNav" class="navbar static-top navbar-toggleable-md navbar-inverse bg-inverse">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarExample" aria-controls="navbarExample" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">Bem Vindo Professor!</a>
+    <div class="collapse navbar-collapse" id="navbarExample">
+        <ul class="sidebar-nav navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index", "Professor")"><i class="fa fa-fw fa-dashboard"></i>Área de Trabalho</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="@Url.Action("Postar", "Professor")"><i class="fa fa-fw fa-book"></i>Postar Materiais</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="@Url.Action("Aprovar", "Professor")"><i class="fa fa-fw fa-table"></i>Aprovar Conteudo</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="@Url.Action("Cadastrar", "Professor")"><i class="fa fa-fw fa-edit"></i>Habilitar Monitor</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Logout", "Professor")"><i class="fa fa-fw fa-sign-out"></i>Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="content-wrapper py-3">
+    <div class="container-fluid">
+        <!-- Breadcrumbs -->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Área de Trabalho</a></li>
+            <li class="breadcrumb-item active">Professor</li>
+        </ol>
+        <!-- Icon Cards -->
+        <div class="row">
+            <div class="col-xl-3 col-sm-6 mb-3">
+                <div class="card card-inverse card-primary o-hidden h-100">
+                    <div class="card-block">
+                        <div class="card-block-icon">
+                            <i class="fa fa-fw fa-comments"></i>
+                        </div>
+                        <div class="mr-5">
+                            26 Novas Mensagens!
+                        </div>
+                    </div>
+                    <a href="#" class="card-footer clearfix small z-1">
+                        <span class="float-left">Verificar</span>
+                        <span class="float-right"><i class="fa fa-angle-right"></i></span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-3">
+                <div class="card card-inverse card-success o-hidden h-100">
+                    <div class="card-block">
+                        <div class="card-block-icon">
+                            <i class="fa fa-fw fa-list"></i>
+                        </div>
+                        <div class="mr-5">
+                            11 Novos Materiais!
+                        </div>
+                    </div>
+                    <a href="#" class="card-footer clearfix small z-1">
+                        <span class="float-left">Verificar</span>
+                        <span class="float-right"><i class="fa fa-angle-right"></i></span>
+                    </a>
+                </div>
+            </div>
+    
+            <div class="col-xl-3 col-sm-6 mb-3">
+                <div class="card card-inverse card-danger o-hidden h-100">
+                    <div class="card-block">
+                        <div class="card-block-icon">
+                            <i class="fa fa-fw fa-star"></i>
+                        </div>
+                        <div class="mr-5">
+                            Conteudos Favoritos!
+                        </div>
+                    </div>
+                    <a href="#" class="card-footer clearfix small z-1">
+                        <span class="float-left">Verificar</span>
+                        <span class="float-right"><i class="fa fa-angle-right"></i></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container-fluid -->
+    <div class="container-fluid">
+        <form action="/Professor/CadastrarMonitor" method="post">
+
+            <label for="inputReciver">Aluno:</label>
+            <select class="form-control"  name="idAluno">
+                @foreach (var aluno in ViewBag.Alunos)
+                {
+                    <option value="@aluno.IDUSER">@aluno.NMUSER</option>
+                }
+            </select>
+           
+            <br />
+            <button class="btn btn-primary" type="submit">Enviar</button>
+            @*<input class="btn-primary" type="submit" value="Enviar" />*@
+        </form>
+    </div>
+    
+    <br />
+    <br />
+    <br />
+    <div class="container">
+        <h2>Monitor Cadastrado</h2>
+        
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Excluir</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td>Excluir</td>
+                       
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

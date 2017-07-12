@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e993103962e64d309462ecb4c5c63d12" Name="Diagram1" ZoomLevel="55">
+        <EntityTypeShape EntityType="MONITORIA_FATECModel.CONTENT" Width="1.5" PointX="2.625" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MONITORIA_FATECModel.COURSE" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MONITORIA_FATECModel.DISCIPLINE" Width="1.5" PointX="5.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MONITORIA_FATECModel.SCOPE" Width="1.5" PointX="8.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MONITORIA_FATECModel.STATUSCONTENT" Width="1.5" PointX="0.5" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MONITORIA_FATECModel.TYPECONTENT" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MONITORIA_FATECModel.TYPEMESSAGE" Width="1.5" PointX="7.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MONITORIA_FATECModel.USERMESSAGE" Width="1.5" PointX="10.625" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MONITORIA_FATECModel.USUARIO" Width="1.5" PointX="11.625" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MONITORIA_FATECModel.SCHEDULE" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="MONITORIA_FATECModel.FK_STATUSCONTENT" ManuallyRouted="false" />
+        <AssociationConnector Association="MONITORIA_FATECModel.FK_TYPECONTENT" ManuallyRouted="false" />
+        <AssociationConnector Association="MONITORIA_FATECModel.FK_COURSE" ManuallyRouted="false" />
+        <AssociationConnector Association="MONITORIA_FATECModel.FK_DISCIPLINE" ManuallyRouted="false" />
+        <AssociationConnector Association="MONITORIA_FATECModel.FK_SCOPE" ManuallyRouted="false" />
+        <AssociationConnector Association="MONITORIA_FATECModel.FK_TYPEMESSAGE" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MONITORIA_FATECModel.CALENDAR" Width="1.5" PointX="13.875" PointY="1" />
+        <AssociationConnector Association="MONITORIA_FATECModel.FK_DISCIPLINE_CALENDAR" />
+        <AssociationConnector Association="MONITORIA_FATECModel.FK_USER_MONITOR" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

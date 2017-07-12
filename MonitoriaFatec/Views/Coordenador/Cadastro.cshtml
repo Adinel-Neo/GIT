@@ -1,0 +1,130 @@
+﻿
+@{
+    ViewBag.Title = "Coordenador(a)";
+}
+
+<!-- Navigation -->
+<nav id="mainNav" class="navbar static-top navbar-toggleable-md navbar-inverse bg-inverse">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarExample" aria-controls="navbarExample" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">Bem Vindo Coordenador!</a>
+    <div class="collapse navbar-collapse" id="navbarExample">
+        <ul class="sidebar-nav navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index", "Coordenador")"><i class="fa fa-fw fa-dashboard"></i>Área de Trabalho</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Materiais", "Coordenador")"><i class="fa fa-fw fa-book"></i>Materiais</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Calendario", "Coordenador")"><i class="fa fa-fw fa-table"></i>Calendario Monitoria</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="@Url.Action("Cadastro", "Coordenador")"><i class="fa fa-fw fa-edit"></i>Cadastro de Alunos / Professores / Disciplina</a>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action( "Logout", "Coordenador")"><i class="fa fa-fw fa-sign-out"></i>Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="content-wrapper py-3">
+    <div class="container-fluid">
+        <!-- Breadcrumbs -->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Área de Trabalho</a></li>
+            <li class="breadcrumb-item active">Coordenador</li>
+        </ol>
+        <!-- Icon Cards -->
+        <div class="row">
+            <div class="col-xl-3 col-sm-6 mb-3">
+                <div class="card card-inverse card-primary o-hidden h-100">
+                    <div class="card-block">
+                        <div class="card-block-icon">
+                            <i class="fa fa-fw fa-comments"></i>
+                        </div>
+                        <div class="mr-5">
+                            26 Novas Mensagens!
+                        </div>
+                    </div>
+                    <a href="#" class="card-footer clearfix small z-1">
+                        <span class="float-left">Verificar</span>
+                        <span class="float-right"><i class="fa fa-angle-right"></i></span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-sm-6 mb-3">
+                <div class="card card-inverse card-danger o-hidden h-100">
+                    <div class="card-block">
+                        <div class="card-block-icon">
+                            <i class="fa fa-fw fa-star"></i>
+                        </div>
+                        <div class="mr-5">
+                            Conteudos Favoritos!
+                        </div>
+                    </div>
+                    <a href="#" class="card-footer clearfix small z-1">
+                        <span class="float-left">Verificar</span>
+                        <span class="float-right"><i class="fa fa-angle-right"></i></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="container-fluid">
+        <form action="/Coordenador/CadastraProfessor" method="post">
+            <h3>Cadastro de Professor</h3>
+            <label for="inputHeader">Nome:</label>
+            <input type="text" name="nome" id="inputHeader" class="form-control" required="" autofocus="" style="background-repeat: no-repeat; background-attachment: scroll;  cursor: auto;" autocomplete="off">
+            <label for="inputReciver">Email</label>
+            <input type="email" name="email" id="inputHeader" class="form-control" style="background-repeat: no-repeat; background-attachment: scroll;" autocomplete="off">
+            <label for="inputDiscipline">Disciplina</label>
+            <select class="form-control" id="inputDiscipline">
+                @foreach (var disciplina in ViewBag.Disciplinas)
+                {
+                    <option id="@disciplina.IDDISCIPLINE">@disciplina.NMDISCIPLINE</option>
+                }
+                
+            </select>
+            <br />
+            <button class="btn btn-primary" type="submit">Enviar</button>
+            @*<input class="btn-primary" type="submit" value="Enviar" />*@
+        </form>
+    </div>
+    <br />
+    <br />
+    <br />
+    <div class="container-fluid">
+        <form action="/Coordenador/CadastraAluno" method="post">
+            <h3>Cadastro de Aluno</h3>
+            <label for="inputHeader">Nome:</label>
+            <input type="text" name="nome" id="inputHeader" class="form-control" required="" autofocus="" style="background-repeat: no-repeat; background-attachment: scroll;  cursor: auto;" autocomplete="off">
+            <label for="inputReciver">Email</label>
+            <input type="email" name="email" id="inputHeader" class="form-control" style="background-repeat: no-repeat; background-attachment: scroll;" autocomplete="off">
+            <br />
+            <button class="btn btn-primary" type="submit">Enviar</button>
+            @*<input class="btn-primary" type="submit" value="Enviar" />*@
+        </form>
+    </div>
+    <br />
+    <br />
+    <br />
+    <div class="container-fluid">
+        <form action="/Coordenador/CadastraDisciplina" method="post">
+            <h3>Cadastro Disciplina</h3>
+            <label for="nome">Nome:</label>
+            <input type="text" name="nome" id="inputHeader" class="form-control" required="" autofocus="" style="background-repeat: no-repeat; background-attachment: scroll;  cursor: auto;" autocomplete="off">
+           
+            <br />
+            <button class="btn btn-primary" type="submit">Enviar</button>
+            @*<input class="btn-primary" type="submit" value="Enviar" />*@
+        </form>
+    </div>
+</div>
+
